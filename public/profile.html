@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profile — SatyaDrishti Complaint Management</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/style.css">
+  <style>
+    .page-layout {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      background: var(--background);
+    }
+    
+    .page-nav {
+      background: var(--card);
+      border-bottom: 1px solid var(--border);
+      padding: var(--spacing-md) var(--spacing-lg);
+    }
+    
+    .page-nav-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    
+    .page-brand {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-sm);
+      font-weight: 600;
+      font-size: 1.125rem;
+    }
+    
+    .page-brand-icon {
+      width: 36px;
+      height: 36px;
+      background: var(--primary);
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+    }
+    
+    .page-main {
+      flex: 1;
+      padding: var(--spacing-xl) var(--spacing-lg);
+      max-width: 900px;
+      margin: 0 auto;
+      width: 100%;
+    }
+    
+    .page-header {
+      margin-bottom: var(--spacing-xl);
+    }
+    
+    .page-title {
+      font-size: 1.75rem;
+      font-weight: 700;
+      margin-bottom: var(--spacing-xs);
+    }
+    
+    .page-subtitle {
+      color: var(--text-secondary);
+    }
+    
+    .profile-grid {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: var(--spacing-lg);
+    }
+    
+    .profile-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: var(--spacing-xl);
+      text-align: center;
+    }
+    
+    .profile-avatar {
+      width: 120px;
+      height: 120px;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto var(--spacing-lg);
+      color: white;
+      font-size: 2.5rem;
+      font-weight: 700;
+    }
+    
+    .profile-name {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: var(--spacing-xs);
+    }
+    
+    .profile-email {
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+      margin-bottom: var(--spacing-lg);
+    }
+    
+    .profile-stats {
+      display: flex;
+      justify-content: center;
+      gap: var(--spacing-lg);
+      padding-top: var(--spacing-lg);
+      border-top: 1px solid var(--border);
+    }
+    
+    .profile-stat {
+      text-align: center;
+    }
+    
+    .profile-stat-value {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--primary);
+    }
+    
+    .profile-stat-label {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-top: var(--spacing-xs);
+    }
+    
+    .form-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: var(--spacing-xl);
+    }
+    
+    .form-section {
+      margin-bottom: var(--spacing-xl);
+    }
+    
+    .form-section-title {
+      font-size: 1.125rem;
+      font-weight: 600;
+      margin-bottom: var(--spacing-lg);
+      padding-bottom: var(--spacing-sm);
+      border-bottom: 1px solid var(--border);
+    }
+    
+    .form-row {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--spacing-md);
+    }
+    
+    .form-actions {
+      display: flex;
+      gap: var(--spacing-md);
+      justify-content: flex-end;
+      margin-top: var(--spacing-xl);
+      padding-top: var(--spacing-lg);
+      border-top: 1px solid var(--border);
+    }
+    
+    .alert {
+      display: none;
+      padding: var(--spacing-md);
+      border-radius: var(--radius-md);
+      border: 1px solid;
+      margin-bottom: var(--spacing-lg);
+      font-size: 0.875rem;
+    }
+    
+    .alert.show {
+      display: block;
+    }
+    
+    @media (max-width: 768px) {
+      .profile-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+      
+      .form-actions {
+        flex-direction: column;
+      }
+      
+      .form-actions .btn {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page-layout">
+    <!-- Navigation -->
+    <nav class="page-nav">
+      <div class="page-nav-inner">
+        <div class="page-brand">
+          <div class="page-brand-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+              <path d="M2 17l10 5 10-5"/>
+              <path d="M2 12l10 5 10-5"/>
+            </svg>
+          </div>
+          <span>SatyaDrishti</span>
+        </div>
+        <a href="/dashboard" class="btn btn-outline btn-sm">Back to Dashboard</a>
+      </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="page-main">
+      <div class="page-header">
+        <h1 class="page-title">My Profile</h1>
+        <p class="page-subtitle">Manage your account settings and preferences</p>
+      </div>
+
+      <div class="profile-grid">
+        <!-- Profile Card -->
+        <div class="profile-card">
+          <div class="profile-avatar" id="profileAvatar">U</div>
+          <div class="profile-name" id="profileName">Loading...</div>
+          <div class="profile-email" id="profileEmail">...</div>
+          
+          <div class="profile-stats">
+            <div class="profile-stat">
+              <div class="profile-stat-value" id="totalComplaints">-</div>
+              <div class="profile-stat-label">Complaints</div>
+            </div>
+            <div class="profile-stat">
+              <div class="profile-stat-value" id="resolvedComplaints">-</div>
+              <div class="profile-stat-label">Resolved</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Form Card -->
+        <div class="form-card">
+          <form id="profileForm" novalidate>
+            <!-- Personal Information -->
+            <div class="form-section">
+              <h2 class="form-section-title">Personal Information</h2>
+              
+              <div class="form-group">
+                <label class="form-label" for="fullName">Full Name</label>
+                <input 
+                  type="text" 
+                  id="fullName" 
+                  name="fullName" 
+                  class="form-input" 
+                  required
+                >
+              </div>
+              
+              <div class="form-group">
+                <label class="form-label" for="email">Email Address</label>
+                <input 
+                  type="email" 
+                  id="email" 
+                  name="email" 
+                  class="form-input" 
+                  disabled
+                >
+                <div class="form-hint">Email cannot be changed</div>
+              </div>
+              
+              <div class="form-group">
+                <label class="form-label" for="phone">Phone Number</label>
+                <input 
+                  type="tel" 
+                  id="phone" 
+                  name="phone" 
+                  class="form-input" 
+                  placeholder="+91 98765 43210"
+                >
+              </div>
+            </div>
+
+            <!-- Account Information -->
+            <div class="form-section">
+              <h2 class="form-section-title">Account Information</h2>
+              
+              <div class="form-group">
+                <label class="form-label">Member Since</label>
+                <input 
+                  type="text" 
+                  id="createdAt" 
+                  class="form-input" 
+                  disabled
+                >
+              </div>
+            </div>
+
+            <!-- Alert -->
+            <div class="alert alert-error" id="formAlert" role="alert"></div>
+            <div class="alert alert-success" id="successAlert" role="alert"></div>
+
+            <!-- Actions -->
+            <div class="form-actions">
+              <a href="/dashboard" class="btn btn-outline">Cancel</a>
+              <button type="submit" class="btn btn-primary" id="submitBtn">
+                <span class="btn-text">Save Changes</span>
+                <div class="spinner"></div>
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="/auth.js"></script>
+  <script src="/profile.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      SatyaAuth.guardDashboard();
+      Profile.init();
+    });
+  </script>
+</body>
+</html>

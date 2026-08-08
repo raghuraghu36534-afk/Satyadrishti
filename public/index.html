@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SatyaDrishti — Complaint Management System</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/style.css">
+  <style>
+    .hero {
+      position: relative;
+      padding: 120px 0 80px;
+      background: linear-gradient(135deg, var(--background) 0%, #EFF6FF 100%);
+      overflow: hidden;
+    }
+    
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: radial-gradient(circle at 20% 50%, rgba(37, 99, 235, 0.05) 0%, transparent 50%),
+                  radial-gradient(circle at 80% 50%, rgba(59, 130, 246, 0.05) 0%, transparent 50%);
+      pointer-events: none;
+    }
+    
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    
+    .hero-title {
+      font-size: 3.5rem;
+      font-weight: 800;
+      margin-bottom: var(--spacing-md);
+      line-height: 1.1;
+      background: linear-gradient(135deg, var(--text) 0%, var(--primary) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    .hero-subtitle {
+      font-size: 1.25rem;
+      color: var(--text-secondary);
+      margin-bottom: var(--spacing-xl);
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    
+    .hero-actions {
+      display: flex;
+      gap: var(--spacing-md);
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    
+    .features {
+      padding: 100px 0;
+      background: var(--card);
+    }
+    
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: var(--spacing-xl);
+      margin-top: var(--spacing-2xl);
+    }
+    
+    .feature-card {
+      text-align: center;
+      padding: var(--spacing-xl);
+    }
+    
+    .feature-icon {
+      width: 64px;
+      height: 64px;
+      background: #EFF6FF;
+      border-radius: var(--radius-lg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto var(--spacing-lg);
+      color: var(--primary);
+    }
+    
+    .feature-title {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: var(--spacing-sm);
+    }
+    
+    .feature-description {
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+    
+    .how-it-works {
+      padding: 100px 0;
+      background: var(--background);
+    }
+    
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: var(--spacing-xl);
+      margin-top: var(--spacing-2xl);
+    }
+    
+    .step {
+      text-align: center;
+      position: relative;
+    }
+    
+    .step-number {
+      width: 48px;
+      height: 48px;
+      background: var(--primary);
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin: 0 auto var(--spacing-md);
+    }
+    
+    .step-title {
+      font-size: 1.125rem;
+      font-weight: 600;
+      margin-bottom: var(--spacing-sm);
+    }
+    
+    .step-description {
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+    
+    .cta {
+      padding: 100px 0;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+      color: white;
+      text-align: center;
+    }
+    
+    .cta-title {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: var(--spacing-md);
+      color: white;
+    }
+    
+    .cta-subtitle {
+      font-size: 1.125rem;
+      opacity: 0.9;
+      margin-bottom: var(--spacing-xl);
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    
+    .cta .btn-primary {
+      background: white;
+      color: var(--primary);
+    }
+    
+    .cta .btn-primary:hover {
+      background: var(--background);
+    }
+    
+    .cta .btn-outline {
+      border-color: rgba(255, 255, 255, 0.3);
+      color: white;
+    }
+    
+    .cta .btn-outline:hover {
+      border-color: white;
+      background: rgba(255, 255, 255, 0.1);
+    }
+    
+    @media (max-width: 768px) {
+      .hero-title {
+        font-size: 2.5rem;
+      }
+      
+      .hero-subtitle {
+        font-size: 1rem;
+      }
+      
+      .cta-title {
+        font-size: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <div class="nav-brand">
+        <div class="nav-brand-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+            <path d="M2 17l10 5 10-5"/>
+            <path d="M2 12l10 5 10-5"/>
+          </svg>
+        </div>
+        <span>SatyaDrishti</span>
+      </div>
+      <div class="nav-links">
+        <a href="#features">Features</a>
+        <a href="#how-it-works">How It Works</a>
+      </div>
+      <div class="nav-actions">
+        <a href="/login" class="btn btn-text">Sign In</a>
+        <a href="/register" class="btn btn-primary">Get Started</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1 class="hero-title">Voice Your Concerns, Drive Change</h1>
+      <p class="hero-subtitle">A transparent and efficient complaint management system designed to connect citizens with authorities for faster resolution.</p>
+      <div class="hero-actions">
+        <a href="/register" class="btn btn-primary btn-lg">Create Account</a>
+        <a href="#how-it-works" class="btn btn-outline btn-lg">Learn More</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="features" id="features">
+    <div class="container">
+      <div style="text-align: center; max-width: 600px; margin: 0 auto;">
+        <h2 style="font-size: 2rem; margin-bottom: var(--spacing-sm);">Why Choose SatyaDrishti?</h2>
+        <p style="color: var(--text-secondary);">Our platform is built to make the complaint filing process simple, transparent, and effective.</p>
+      </div>
+      
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            </svg>
+          </div>
+          <h3 class="feature-title">Secure & Private</h3>
+          <p class="feature-description">Your data is protected with enterprise-grade security and encryption.</p>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"/>
+              <polyline points="12 6 12 12 16 14"/>
+            </svg>
+          </div>
+          <h3 class="feature-title">Fast Resolution</h3>
+          <p class="feature-description">Track your complaints in real-time and get timely updates on progress.</p>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+              <polyline points="14 2 14 8 20 8"/>
+              <line x1="16" y1="13" x2="8" y2="13"/>
+              <line x1="16" y1="17" x2="8" y2="17"/>
+              <polyline points="10 9 9 9 8 9"/>
+            </svg>
+          </div>
+          <h3 class="feature-title">Easy to Use</h3>
+          <p class="feature-description">Simple interface designed for everyone, regardless of technical expertise.</p>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+              <polyline points="22 4 12 14.01 9 11.01"/>
+            </svg>
+          </div>
+          <h3 class="feature-title">Transparent Process</h3>
+          <p class="feature-description">Full visibility into the status and progress of your complaints.</p>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+            </svg>
+          </div>
+          <h3 class="feature-title">Categorized System</h3>
+          <p class="feature-description">Organized categories ensure your complaint reaches the right department.</p>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+              <circle cx="9" cy="7" r="4"/>
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+              <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+            </svg>
+          </div>
+          <h3 class="feature-title">Community Driven</h3>
+          <p class="feature-description">Join thousands of citizens working together for better governance.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works Section -->
+  <section class="how-it-works" id="how-it-works">
+    <div class="container">
+      <div style="text-align: center; max-width: 600px; margin: 0 auto;">
+        <h2 style="font-size: 2rem; margin-bottom: var(--spacing-sm);">How It Works</h2>
+        <p style="color: var(--text-secondary);">File your complaint in three simple steps</p>
+      </div>
+      
+      <div class="steps">
+        <div class="step">
+          <div class="step-number">1</div>
+          <h3 class="step-title">Create Account</h3>
+          <p class="step-description">Register with your email and create your profile in minutes.</p>
+        </div>
+        
+        <div class="step">
+          <div class="step-number">2</div>
+          <h3 class="step-title">File Complaint</h3>
+          <p class="step-description">Describe your issue, choose a category, and submit your complaint.</p>
+        </div>
+        
+        <div class="step">
+          <div class="step-number">3</div>
+          <h3 class="step-title">Track Progress</h3>
+          <p class="step-description">Monitor your complaint status and receive real-time updates.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="cta">
+    <div class="container">
+      <h2 class="cta-title">Ready to Make a Difference?</h2>
+      <p class="cta-subtitle">Join thousands of citizens who are already using SatyaDrishti to voice their concerns and drive positive change.</p>
+      <div class="hero-actions">
+        <a href="/register" class="btn btn-primary btn-lg">Get Started Free</a>
+        <a href="#features" class="btn btn-outline btn-lg">Learn More</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer style="background: var(--card); border-top: 1px solid var(--border); padding: var(--spacing-xl) 0;">
+    <div class="container">
+      <div style="text-align: center; color: var(--text-secondary);">
+        <p>&copy; 2024 SatyaDrishti. All rights reserved.</p>
+        <p style="font-size: 0.875rem; margin-top: var(--spacing-sm);">A transparent complaint management system for better governance.</p>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

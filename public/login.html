@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign In — SatyaDrishti Complaint Management</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="/auth.css">
+</head>
+<body>
+  <div class="auth-shell">
+    <a href="/" class="auth-back">
+      <svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>
+      Back to home
+    </a>
+    
+    <div class="auth-card">
+      <div class="auth-brand">
+        <div class="auth-brand-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+            <path d="M2 17l10 5 10-5"/>
+            <path d="M2 12l10 5 10-5"/>
+          </svg>
+        </div>
+        <div class="auth-brand-name">SatyaDrishti</div>
+      </div>
+      
+      <div class="auth-head">
+        <h1>Welcome back</h1>
+        <p>Sign in to your account to continue</p>
+      </div>
+      
+      <div class="auth-alert auth-alert-error" id="authAlert" role="alert"></div>
+      
+      <form id="loginForm" novalidate>
+        <div class="auth-field">
+          <label for="email">Email address</label>
+          <input type="email" id="email" name="email" autocomplete="email" placeholder="you@example.com" required>
+        </div>
+        
+        <div class="auth-field">
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" autocomplete="current-password" placeholder="••••••••" required>
+        </div>
+        
+        <button class="btn btn-primary auth-submit" type="submit" id="submitBtn">
+          <span class="btn-text">Sign in</span>
+          <div class="spinner"></div>
+        </button>
+      </form>
+      
+      <div class="auth-foot">
+        Don't have an account? <a href="/register">Create one</a>
+      </div>
+    </div>
+  </div>
+  
+  <script src="/auth.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      SatyaAuth.initLoginForm();
+    });
+  </script>
+</body>
+</html>

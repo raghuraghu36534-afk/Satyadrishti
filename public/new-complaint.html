@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>File Complaint — SatyaDrishti Complaint Management</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/style.css">
+  <style>
+    .page-layout {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      background: var(--background);
+    }
+    
+    .page-nav {
+      background: var(--card);
+      border-bottom: 1px solid var(--border);
+      padding: var(--spacing-md) var(--spacing-lg);
+    }
+    
+    .page-nav-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    
+    .page-brand {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-sm);
+      font-weight: 600;
+      font-size: 1.125rem;
+    }
+    
+    .page-brand-icon {
+      width: 36px;
+      height: 36px;
+      background: var(--primary);
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+    }
+    
+    .page-main {
+      flex: 1;
+      padding: var(--spacing-xl) var(--spacing-lg);
+      max-width: 900px;
+      margin: 0 auto;
+      width: 100%;
+    }
+    
+    .page-header {
+      margin-bottom: var(--spacing-xl);
+    }
+    
+    .page-title {
+      font-size: 1.75rem;
+      font-weight: 700;
+      margin-bottom: var(--spacing-xs);
+    }
+    
+    .page-subtitle {
+      color: var(--text-secondary);
+    }
+    
+    .form-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: var(--spacing-xl);
+      box-shadow: var(--shadow-sm);
+    }
+    
+    .form-section {
+      margin-bottom: var(--spacing-xl);
+    }
+    
+    .form-section-title {
+      font-size: 1.125rem;
+      font-weight: 600;
+      margin-bottom: var(--spacing-lg);
+      padding-bottom: var(--spacing-sm);
+      border-bottom: 1px solid var(--border);
+    }
+    
+    .form-row {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--spacing-md);
+    }
+    
+    .form-actions {
+      display: flex;
+      gap: var(--spacing-md);
+      justify-content: flex-end;
+      margin-top: var(--spacing-xl);
+      padding-top: var(--spacing-lg);
+      border-top: 1px solid var(--border);
+    }
+    
+    .category-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: var(--spacing-sm);
+    }
+    
+    .category-option {
+      position: relative;
+    }
+    
+    .category-option input {
+      position: absolute;
+      opacity: 0;
+      cursor: pointer;
+    }
+    
+    .category-label {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--spacing-sm);
+      padding: var(--spacing-md);
+      background: var(--background);
+      border: 2px solid var(--border);
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-align: center;
+    }
+    
+    .category-label:hover {
+      border-color: var(--border-hover);
+      background: var(--background-hover);
+    }
+    
+    .category-option input:checked + .category-label {
+      border-color: var(--primary);
+      background: #EFF6FF;
+    }
+    
+    .category-icon {
+      width: 32px;
+      height: 32px;
+      color: var(--text-secondary);
+    }
+    
+    .category-option input:checked + .category-label .category-icon {
+      color: var(--primary);
+    }
+    
+    .category-name {
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: var(--text);
+    }
+    
+    .priority-options {
+      display: flex;
+      gap: var(--spacing-sm);
+    }
+    
+    .priority-option {
+      position: relative;
+      flex: 1;
+    }
+    
+    .priority-option input {
+      position: absolute;
+      opacity: 0;
+      cursor: pointer;
+    }
+    
+    .priority-label {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--spacing-sm);
+      padding: var(--spacing-sm) var(--spacing-md);
+      background: var(--background);
+      border: 2px solid var(--border);
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-size: 0.875rem;
+      font-weight: 500;
+    }
+    
+    .priority-label:hover {
+      border-color: var(--border-hover);
+      background: var(--background-hover);
+    }
+    
+    .priority-option input:checked + .priority-label {
+      border-color: var(--primary);
+      background: #EFF6FF;
+      color: var(--primary);
+    }
+    
+    @media (max-width: 768px) {
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+      
+      .category-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      
+      .form-actions {
+        flex-direction: column;
+      }
+      
+      .form-actions .btn {
+        width: 100%;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .category-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .priority-options {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page-layout">
+    <!-- Navigation -->
+    <nav class="page-nav">
+      <div class="page-nav-inner">
+        <div class="page-brand">
+          <div class="page-brand-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+              <path d="M2 17l10 5 10-5"/>
+              <path d="M2 12l10 5 10-5"/>
+            </svg>
+          </div>
+          <span>SatyaDrishti</span>
+        </div>
+        <a href="/dashboard" class="btn btn-outline btn-sm">Back to Dashboard</a>
+      </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="page-main">
+      <div class="page-header">
+        <h1 class="page-title">File a New Complaint</h1>
+        <p class="page-subtitle">Provide details about your complaint. We'll review and process it.</p>
+      </div>
+
+      <div class="form-card">
+        <form id="complaintForm" novalidate>
+          <!-- Complaint Details -->
+          <div class="form-section">
+            <h2 class="form-section-title">Complaint Details</h2>
+            
+            <div class="form-group">
+              <label class="form-label" for="title">Complaint Title *</label>
+              <input 
+                type="text" 
+                id="title" 
+                name="title" 
+                class="form-input" 
+                placeholder="Brief title describing your complaint"
+                required
+              >
+            </div>
+            
+            <div class="form-group">
+              <label class="form-label" for="description">Description *</label>
+              <textarea 
+                id="description" 
+                name="description" 
+                class="form-textarea" 
+                placeholder="Provide detailed information about your complaint..."
+                required
+              ></textarea>
+            </div>
+          </div>
+
+          <!-- Category -->
+          <div class="form-section">
+            <h2 class="form-section-title">Category *</h2>
+            <div class="category-grid">
+              <div class="category-option">
+                <input type="radio" name="category" value="infrastructure" id="cat-infrastructure" required>
+                <label class="category-label" for="cat-infrastructure">
+                  <svg class="category-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M3 21h18"/>
+                    <path d="M5 21V7l8-4 8 4v14"/>
+                    <path d="M17 21v-8.5a1.5 1.5 0 0 0-3 0V21"/>
+                  </svg>
+                  <span class="category-name">Infrastructure</span>
+                </label>
+              </div>
+              
+              <div class="category-option">
+                <input type="radio" name="category" value="public_service" id="cat-public">
+                <label class="category-label" for="cat-public">
+                  <svg class="category-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                    <circle cx="9" cy="7" r="4"/>
+                    <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                    <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                  </svg>
+                  <span class="category-name">Public Service</span>
+                </label>
+              </div>
+              
+              <div class="category-option">
+                <input type="radio" name="category" value="healthcare" id="cat-healthcare">
+                <label class="category-label" for="cat-healthcare">
+                  <svg class="category-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+                  </svg>
+                  <span class="category-name">Healthcare</span>
+                </label>
+              </div>
+              
+              <div class="category-option">
+                <input type="radio" name="category" value="education" id="cat-education">
+                <label class="category-label" for="cat-education">
+                  <svg class="category-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M22 10v6M2 10l10-5 10 5-10 5z"/>
+                    <path d="M6 12v5c3 3 9 3 12 0v-5"/>
+                  </svg>
+                  <span class="category-name">Education</span>
+                </label>
+              </div>
+              
+              <div class="category-option">
+                <input type="radio" name="category" value="sanitation" id="cat-sanitation">
+                <label class="category-label" for="cat-sanitation">
+                  <svg class="category-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/>
+                  </svg>
+                  <span class="category-name">Sanitation</span>
+                </label>
+              </div>
+              
+              <div class="category-option">
+                <input type="radio" name="category" value="transport" id="cat-transport">
+                <label class="category-label" for="cat-transport">
+                  <svg class="category-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="1" y="3" width="15" height="13"/>
+                    <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/>
+                    <circle cx="5.5" cy="18.5" r="2.5"/>
+                    <circle cx="18.5" cy="18.5" r="2.5"/>
+                  </svg>
+                  <span class="category-name">Transport</span>
+                </label>
+              </div>
+              
+              <div class="category-option">
+                <input type="radio" name="category" value="legal" id="cat-legal">
+                <label class="category-label" for="cat-legal">
+                  <svg class="category-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                  </svg>
+                  <span class="category-name">Legal</span>
+                </label>
+              </div>
+              
+              <div class="category-option">
+                <input type="radio" name="category" value="other" id="cat-other">
+                <label class="category-label" for="cat-other">
+                  <svg class="category-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="1"/>
+                    <circle cx="19" cy="12" r="1"/>
+                    <circle cx="5" cy="12" r="1"/>
+                  </svg>
+                  <span class="category-name">Other</span>
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <!-- AI Priority Assessment -->
+          <div class="form-section">
+            <h2 class="form-section-title">AI Priority Assessment</h2>
+            <div style="background: var(--background); border: 1px solid var(--border); border-radius: var(--radius-md); padding: var(--spacing-md);">
+              <div style="display: flex; align-items: center; gap: var(--spacing-sm); margin-bottom: var(--spacing-sm);">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2">
+                  <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                  <path d="M2 17l10 5 10-5"/>
+                  <path d="M2 12l10 5 10-5"/>
+                </svg>
+                <span style="font-weight: 500; color: var(--text);">AI-Powered Priority System</span>
+              </div>
+              <p style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: var(--spacing-sm);">
+                Priority will be automatically determined by AI based on your complaint details, category, and evidence image (if provided). The system analyzes severity, urgency, and public safety factors.
+              </p>
+              <div id="aiPriorityResult" style="display: none; margin-top: var(--spacing-md); padding-top: var(--spacing-md); border-top: 1px solid var(--border);">
+                <div style="display: flex; align-items: center; gap: var(--spacing-md); margin-bottom: var(--spacing-sm);">
+                  <span style="font-weight: 600; color: var(--text);">AI Priority:</span>
+                  <span id="aiPriorityBadge" class="badge"></span>
+                  <span style="font-weight: 600; color: var(--text);">Confidence:</span>
+                  <span id="aiConfidenceBadge" style="font-weight: 500; color: var(--text-secondary);"></span>
+                </div>
+                <p id="aiReasonText" style="color: var(--text-secondary); font-size: 0.875rem; font-style: italic;"></p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Location -->
+          <div class="form-section">
+            <h2 class="form-section-title">Location Information</h2>
+            <div class="form-group">
+              <label class="form-label" for="location">Location (optional)</label>
+              <input 
+                type="text" 
+                id="location" 
+                name="location" 
+                class="form-input" 
+                placeholder="Enter address or location"
+              >
+            </div>
+          </div>
+
+          <!-- Evidence Image -->
+          <div class="form-section">
+            <h2 class="form-section-title">Evidence Image (optional)</h2>
+            <div class="form-group">
+              <label class="form-label" for="evidenceImage">Upload supporting image evidence</label>
+              <input 
+                type="file" 
+                id="evidenceImage" 
+                name="evidenceImage" 
+                class="form-input" 
+                accept="image/jpeg,image/jpg,image/png,image/gif,image/webp"
+              >
+              <small style="color: var(--text-muted); display: block; margin-top: var(--spacing-xs);">
+                Accepted formats: JPEG, PNG, GIF, WebP. Maximum file size: 5MB.
+              </small>
+            </div>
+            
+            <!-- Image Preview -->
+            <div id="imagePreviewContainer" style="display: none; margin-top: var(--spacing-md);">
+              <label class="form-label">Image Preview</label>
+              <div style="position: relative; display: inline-block;">
+                <img 
+                  id="imagePreview" 
+                  src="" 
+                  alt="Evidence preview" 
+                  style="max-width: 100%; max-height: 300px; border-radius: var(--radius-md); border: 1px solid var(--border);"
+                >
+                <button 
+                  type="button" 
+                  id="removeImageBtn" 
+                  style="position: absolute; top: 8px; right: 8px; background: rgba(0,0,0,0.7); color: white; border: none; border-radius: 50%; width: 32px; height: 32px; cursor: pointer; display: flex; align-items: center; justify-content: center;"
+                  title="Remove image"
+                >
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="18" y1="6" x2="6" y2="18"/>
+                    <line x1="6" y1="6" x2="18" y2="18"/>
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Alert -->
+          <div class="alert alert-error" id="formAlert" role="alert"></div>
+
+          <!-- Actions -->
+          <div class="form-actions">
+            <a href="/dashboard" class="btn btn-outline">Cancel</a>
+            <button type="submit" class="btn btn-primary" id="submitBtn">
+              <span class="btn-text">Submit Complaint</span>
+              <div class="spinner"></div>
+            </button>
+          </div>
+        </form>
+      </div>
+    </main>
+  </div>
+
+  <script src="/auth.js"></script>
+  <script src="/new-complaint.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      SatyaAuth.guardDashboard();
+      NewComplaint.init();
+    });
+  </script>
+</body>
+</html>
